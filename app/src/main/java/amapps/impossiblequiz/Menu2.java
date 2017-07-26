@@ -3,6 +3,7 @@ package amapps.impossiblequiz;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,10 +27,11 @@ import static amapps.impossiblequiz.R.id.nv2;
 
 public class Menu2 extends AppCompatActivity {
 
+    private int mScore;
     private DrawerLayout mDrawerLayout2;
     private ActionBarDrawerToggle mToggle;
-    private PopupWindow popupWindow;
-    private LayoutInflater layoutInflater; // Allows addign a new layout in our window
+    private PopupWindow mPopupWindow;
+    private LayoutInflater mLayoutInflater; // Allows adding a new layout in our window
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,35 +48,37 @@ public class Menu2 extends AppCompatActivity {
         ImageView imgTrophyView3 = (ImageView) findViewById(R.id.trophy3);
 
         Intent intent = getIntent();
-        int score = intent.getIntExtra("score", 0);
-        txtScore.setText(String.format("Your score: %d", score));
+        mScore = intent.getIntExtra("score", 0);
+        txtScore.setText(String.format("Your score: %d", mScore));
 
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
         int highScore = mypref.getInt("highScore", 0);
 
-        if (score >= 10) {
+        if (mScore > highScore) {
+            highScore = mScore;
+
+            txtHighScore.setText(String.format("High score: %d", mScore));
+
+            SharedPreferences.Editor editor = mypref.edit();
+            editor.putInt("highScore", mScore);
+            editor.apply();
+        } else {
+            txtHighScore.setText(String.format("High score: %d", highScore));
+        }
+
+        if (highScore >= 10) {
             imgTrophyView1.setVisibility(View.VISIBLE);
             bttPOPUP.setVisibility(View.VISIBLE);
         }
 
-        if (score >= 20) {
+        if (highScore >= 20) {
             imgTrophyView2.setVisibility(View.VISIBLE);
             bttPOPUP2.setVisibility(View.VISIBLE);
         }
 
-        if (score >= 30) {
+        if (highScore >= 30) {
             imgTrophyView3.setVisibility(View.VISIBLE);
             bttPOPUP3.setVisibility(View.VISIBLE);
-        }
-
-        if (highScore >= score) {
-            txtHighScore.setText(String.format("High score: %d", highScore));
-
-            SharedPreferences.Editor editor = mypref.edit();
-            editor.putInt("highScore", score);
-            editor.apply();
-        } else {
-            txtHighScore.setText(String.format("Your score: %d", score));
         }
 
         final List<Button> containers = new ArrayList<>();
@@ -93,10 +97,10 @@ public class Menu2 extends AppCompatActivity {
             containers.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container = (ViewGroup) layoutInflater.inflate(popups.get(j), null);
-                    popupWindow = new PopupWindow(container, 1000, 980, true); //400,400=popUp size, true = makes that we can close the pop up by simply click out of the window
-                    popupWindow.showAtLocation(mDrawerLayout2, Gravity.CENTER, 0, 0);
+                    mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    ViewGroup container = (ViewGroup) mLayoutInflater.inflate(popups.get(j), null);
+                    mPopupWindow = new PopupWindow(container, 1000, 980, true); //400,400=popUp size, true = makes that we can close the pop up by simply click out of the window
+                    mPopupWindow.showAtLocation(mDrawerLayout2, Gravity.CENTER, 0, 0);
                     mDrawerLayout2.setAlpha((float) 0.3);
 
                     container.setOnTouchListener(new View.OnTouchListener() {
@@ -105,18 +109,18 @@ public class Menu2 extends AppCompatActivity {
 
                         public boolean onTouch(View view, MotionEvent motionEvent) {
                             mDrawerLayout2.setAlpha(1F);
-                            popupWindow.dismiss();
+                            mPopupWindow.dismiss();
                             return true;
                         }
 
                     });
 
-                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
                         @Override
                         public void onDismiss() {
                             mDrawerLayout2.setAlpha(1F);
-                            popupWindow.dismiss();
+                            mPopupWindow.dismiss();
 
                         }
                     });
@@ -137,7 +141,7 @@ public class Menu2 extends AppCompatActivity {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home2:
                         startActivity(new Intent(Menu2.this, QuizActivity.class));
@@ -159,6 +163,7 @@ public class Menu2 extends AppCompatActivity {
 
     public void onClick(View view) {
         Intent intent = new Intent(Menu2.this, QuizActivity.class);
+        intent.putExtra("score", mScore);
         startActivity(intent);
     }
 }
