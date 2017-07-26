@@ -13,25 +13,20 @@ import static amapps.impossiblequiz.R.id.nv3;
 
 public class Menu3 extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout3;
     private ActionBarDrawerToggle mToggle;
-    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu3);
 
-
-
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
-        mDrawerLayout3 = (DrawerLayout) findViewById(R.id.drawerLayout3);
+        DrawerLayout mDrawerLayout3 = (DrawerLayout) findViewById(R.id.drawerLayout3);
 
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout3, R.string.open, R.string.close);
         mDrawerLayout3.addDrawerListener(mToggle);
         mToggle.syncState();
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -39,36 +34,23 @@ public class Menu3 extends AppCompatActivity {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem){
-                switch (menuItem.getItemId()){
-                    case(R.id.nav_home3):
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case (R.id.nav_home3):
                         startActivity(new Intent(Menu3.this, QuizActivity.class));
-                    break;
-                    case(R.id.nav_stats3):
+                        break;
+                    case (R.id.nav_stats3):
                         startActivity(new Intent(Menu3.this, Menu2.class));
-
-                    break;
+                        break;
                 }
+
                 return true;
             }
         });
     }
 
-
-
-
-
     @Override //Makes that the "Burger" Item, shows the Drawer if someone clicks on the simbol
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-
-
+        return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
-
-
-
 }
