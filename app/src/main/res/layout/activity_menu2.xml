@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="amapps.impossiblequiz.Menu2"
+    android:id="@+id/drawerLayout2"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            layout="@layout/navigation_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+
+
+            <TextView
+                android:id="@+id/textScore2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="#f60"
+                android:paddingTop="10dp"
+                android:paddingLeft="35dp"
+                android:text="Your score is:"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_below="@+id/textView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/textHighScore"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="#FFAB00"
+                android:paddingLeft="35dp"
+                android:paddingRight="100dp"
+                android:paddingTop="10dp"
+                android:text="Highest score:"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:layout_marginTop="13dp"
+                android:layout_below="@+id/textScore2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:id="@+id/tryAgain_button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_pill"
+                android:onClick="onClick"
+                android:text="Restart Quiz!"
+                android:textColor="#ffffff"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/textHighScore"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:text="Stats: play and get trophies!"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textSize="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/statsTrophy"
+
+                app:srcCompat="@drawable/statsoftrophy"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/textHighScore"
+                android:layout_above="@+id/tryAgain_button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:id="@+id/trophy1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tryAgain_button"
+                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="70dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/trophy1" />
+
+            <ImageView
+                android:id="@+id/trophy2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignTop="@+id/trophy1"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/trophy1"
+                android:layout_toRightOf="@+id/trophy1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/trophy2" />
+
+            <Button
+                android:id="@+id/enablePOPUP"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:text="Info"
+                android:alpha="0.30"
+                android:visibility="invisible"
+                android:background="@drawable/bg_pill_trophy"
+                android:textColor="#ffffff"
+                android:layout_alignTop="@+id/enablePOPUP2"
+                android:layout_alignLeft="@+id/trophy1"
+                android:layout_alignStart="@+id/trophy1" />
+
+            <Button
+                android:id="@+id/enablePOPUP2"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_pill_trophy"
+                android:text="Info"
+                android:textColor="#ffffff"
+                android:alpha="0.30"
+                android:visibility="invisible"
+                android:layout_marginTop="12dp"
+                android:layout_below="@+id/trophy2"
+                android:layout_alignLeft="@+id/trophy2"
+                android:layout_alignStart="@+id/trophy2"
+                android:layout_alignRight="@+id/trophy2"
+                android:layout_alignEnd="@+id/trophy2" />
+
+            <ImageView
+                android:id="@+id/trophy3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignTop="@+id/trophy2"
+                android:layout_toLeftOf="@+id/statsTrophy"
+                android:layout_toStartOf="@+id/statsTrophy"
+                app:srcCompat="@drawable/trophy3"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/enablePOPUP3"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_pill_trophy"
+                android:text="Info"
+                android:textColor="#ffffff"
+                android:alpha="0.30"
+                android:visibility="invisible"
+                android:layout_alignBottom="@+id/enablePOPUP2"
+                android:layout_alignLeft="@+id/trophy3"
+                android:layout_alignStart="@+id/trophy3"
+                android:layout_alignTop="@+id/enablePOPUP2"
+                android:layout_alignRight="@+id/trophy3"
+                android:layout_alignEnd="@+id/trophy3" />
+
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_menu2"
+        android:layout_gravity="start"
+        android:id="@+id/nv2"
+        app:headerLayout="@layout/navigation_header"
+        app:itemIconTint="@drawable/tint_color_selector2">
+
+
+
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>
