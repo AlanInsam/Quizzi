@@ -1,4 +1,4 @@
-package amapps.impossiblequiz;
+package shapy.appz;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,8 +76,8 @@ public class QuestionLibrary {
             "Who is currently the fastest man on earth?",
             "How many nations exist on earth?",
             "What is the nearest planet to the sun?",
-            "Witch actor won the most Oskars?",
-            "Witch is the strongest company on earth?",
+            "Whisch actor won the most Oskars?",
+            "Which is the strongest company on earth?",
             "When was the Coca-Cola Company foundet?",
             "In witch city is the highest building located?"
 

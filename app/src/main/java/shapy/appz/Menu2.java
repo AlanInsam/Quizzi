@@ -1,5 +1,6 @@
-package amapps.impossiblequiz;
+package shapy.appz;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,21 +10,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static amapps.impossiblequiz.R.id.nv2;
+import static shapy.appz.R.id.nv2;
 
 public class Menu2 extends AppCompatActivity {
 
@@ -32,6 +31,9 @@ public class Menu2 extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
     private PopupWindow mPopupWindow;
     private LayoutInflater mLayoutInflater; // Allows adding a new layout in our window
+    private RelativeLayout mRel;
+    Dialog dialog;
+    TextView closebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,19 @@ public class Menu2 extends AppCompatActivity {
         TextView txtHighScore = (TextView) findViewById(R.id.textHighScore);
         ImageView imgTrophyView1 = (ImageView) findViewById(R.id.trophy1);
         ImageView imgTrophyView2 = (ImageView) findViewById(R.id.trophy2);
-        Button bttPOPUP = (Button) findViewById(R.id.enablePOPUP);
+        ImageView imgTrophyView3 = (ImageView) findViewById(R.id.trophy3);
+        ImageView imgTrophyView4 =(ImageView)findViewById(R.id.trophy4);
+        ImageView imgTrophyView5 =(ImageView)findViewById(R.id.trophy5);
+        ImageView imgTrophyView6 =(ImageView)findViewById(R.id.trophy6);
+
+        final Button bttPOPUP = (Button) findViewById(R.id.enablePOPUP);
         Button bttPOPUP2 = (Button) findViewById(R.id.enablePOPUP2);
         Button bttPOPUP3 = (Button) findViewById(R.id.enablePOPUP3);
-        ImageView imgTrophyView3 = (ImageView) findViewById(R.id.trophy3);
+        Button bttPOPUP4 = (Button) findViewById(R.id.enablePOPUP4);
+        Button bttPOPUP5 = (Button) findViewById(R.id.enablePOPUP5);
+        Button bttPOPUP6 = (Button) findViewById(R.id.enablePOPUP6);
+
+        final RelativeLayout mRel = (RelativeLayout) findViewById(R.id.bgpop);
 
         Intent intent = getIntent();
         mScore = intent.getIntExtra("score", 0);
@@ -81,50 +92,66 @@ public class Menu2 extends AppCompatActivity {
             bttPOPUP3.setVisibility(View.VISIBLE);
         }
 
+        if (highScore >= 30) {
+            imgTrophyView4.setVisibility(View.VISIBLE);
+            bttPOPUP4.setVisibility(View.VISIBLE);
+        }
+
+        if (highScore >= 30) {
+            imgTrophyView5.setVisibility(View.VISIBLE);
+            bttPOPUP5.setVisibility(View.VISIBLE);
+        }
+
+        if (highScore >= 30) {
+            imgTrophyView6.setVisibility(View.VISIBLE);
+            bttPOPUP6.setVisibility(View.VISIBLE);
+        }
+
         final List<Button> containers = new ArrayList<>();
         containers.add(bttPOPUP);
         containers.add(bttPOPUP2);
         containers.add(bttPOPUP3);
+        containers.add(bttPOPUP4);
+        containers.add(bttPOPUP5);
+        containers.add(bttPOPUP6);
 
-        final List<Integer> popups = new ArrayList<>();
-        popups.add(R.layout.popup_menu2_1);
-        popups.add(R.layout.popup_menu2_2);
-        popups.add(R.layout.popup_menu2_3);
+        final List<Integer> dialogs = new ArrayList<>();
+        dialogs.add(R.layout.popup_menu2_1);
+        dialogs.add(R.layout.popup_menu2_2);
+        dialogs.add(R.layout.popup_menu2_3);
+        dialogs.add(R.layout.popup_menu2_4);
+        dialogs.add(R.layout.popup_menu2_5);
+        dialogs.add(R.layout.popup_menu2_6);
 
-        for (int i = 0; i < popups.size(); i++) {
+        for (int i = 0; i < dialogs.size(); i++) {
             final int j = i;
 
             containers.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mLayoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container = (ViewGroup) mLayoutInflater.inflate(popups.get(j), null);
-                    mPopupWindow = new PopupWindow(container, 1000, 980, true); //400,400=popUp size, true = makes that we can close the pop up by simply click out of the window
-                    mPopupWindow.showAtLocation(mDrawerLayout2, Gravity.CENTER, 0, 0);
-                    mDrawerLayout2.setAlpha((float) 0.3);
 
-                    container.setOnTouchListener(new View.OnTouchListener() {
+                    //createDialog
+                    createDialog();
+                    Button bttopendia = (Button) findViewById(R.id.enablePOPUP);
 
+                    bttopendia.setOnClickListener(new View.OnClickListener() {
                         @Override
-
-                        public boolean onTouch(View view, MotionEvent motionEvent) {
-                            mDrawerLayout2.setAlpha(1F);
-                            mPopupWindow.dismiss();
-                            return true;
-                        }
-
-                    });
-
-                    mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-                        @Override
-                        public void onDismiss() {
-                            mDrawerLayout2.setAlpha(1F);
-                            mPopupWindow.dismiss();
+                        public void onClick(View v) {
+                            dialog.show();
 
                         }
                     });
+
+                    //close dialog
+                    closebtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
                 }
+
             });
         }
 
@@ -166,6 +193,28 @@ public class Menu2 extends AppCompatActivity {
         intent.putExtra("score", mScore);
         startActivity(intent);
     }
+
+    private void createDialog(){
+
+        dialog = new Dialog(this);
+        //Title of the dialogwith dialog.setTitle
+        dialog.setTitle("Tutorial");
+        //content
+        dialog.setContentView(R.layout.popup_menu2_1);
+        closebtn = (TextView) dialog.findViewById(R.id.closeBtn1);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 }
 
 

@@ -1,4 +1,4 @@
-package amapps.impossiblequiz;
+package shapy.appz;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

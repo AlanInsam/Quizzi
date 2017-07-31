@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">ImpossibleQuiz</string>
+    <string name="app_name">Quizzi</string>
+    <string name="stats">Stats</string>
+    <string name="about">About</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <color name="orange">#f60</color>
 
 
 </resources>

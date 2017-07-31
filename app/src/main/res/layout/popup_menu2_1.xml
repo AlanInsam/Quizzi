@@ -14,16 +14,19 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="You reached a score of 10, you have a basic knowledge!"
+            android:text="Well that was easy... wasn't it? You have a basic knowledge"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="58dp" />
 
         <ImageView
             android:layout_width="80dp"
@@ -31,20 +34,22 @@
             android:src="@drawable/trophy1"
             android:layout_marginTop="22dp"
             android:layout_below="@+id/textView3"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageView6" />
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Congratulations!"
-            android:textColor="#ffffff"
-            android:textAlignment="center"
-            android:paddingTop="20dp"
-            android:background="#D32F2F"/>
+            android:id="@+id/closeBtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView6"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_toEndOf="@+id/imageView6"
+            android:layout_toRightOf="@+id/imageView6"
+            android:text="TextView"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:clickable="true"/>
 
     </RelativeLayout>
 </LinearLayout>

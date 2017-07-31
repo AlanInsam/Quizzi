@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="amapps.impossiblequiz.Splash"
-    android:background="#B71C1C"
+    tools:context="shapy.appz.Splash"
+    android:background="#fff"
     android:orientation="vertical">
 
   <RelativeLayout
@@ -27,13 +27,28 @@
       android:layout_marginRight="8dp">
 
 
+      <ImageView
+          android:id="@+id/imageView9"
+          android:layout_width="200dp"
+          android:layout_height="200dp"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          app:srcCompat="@drawable/logo" />
+
       <TextView
+          android:id="@+id/textView"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Impossible Quiz"
-          android:layout_marginTop="100dp"/>
-
-
+          android:layout_below="@+id/imageView9"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="58dp"
+          android:text="Can you reach a score of 60 and get the prodigy trophy?"
+          android:textAppearance="@style/TextAppearance.AppCompat.Button"
+          android:textAlignment="center"
+          android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"
+          android:textStyle="bold"
+          android:textSize="15dp"/>
   </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

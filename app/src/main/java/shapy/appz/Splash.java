@@ -1,4 +1,4 @@
-package amapps.impossiblequiz;
+package shapy.appz;
 
 import android.content.Intent;
 import android.os.Handler;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="amapps.impossiblequiz">
+    package="shapy.appz">
 
     <application
         android:allowBackup="true"
@@ -9,20 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".QuizActivity"
+            android:name="shapy.appz.QuizActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".Menu2" />
+        <activity android:name="shapy.appz.Menu2"
+            android:label="@string/stats"/>
+
         <activity
-            android:name=".Splash"
+            android:name="shapy.appz.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Menu3">
+        <activity android:name="shapy.appz.Menu3"
+            android:label="@string/about">
         </activity>
     </application>
 

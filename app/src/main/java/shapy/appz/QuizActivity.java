@@ -1,5 +1,6 @@
-package amapps.impossiblequiz;
+package shapy.appz;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,14 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +34,11 @@ public class QuizActivity extends AppCompatActivity {
     private String mAnswer;
     private int mScore = 0;
     private int mQuestionNumber = 0;
-    private PopupWindow popupWindow;
+    private RelativeLayout bgpop;
+    private Button dialogBTN;
+    Dialog dialog;
+    TextView closebtn;
+
 
 
     @Override
@@ -45,14 +46,51 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        //createDialog
+        createDialog();
+        dialogBTN = (Button)findViewById(R.id.dialogbtn);
+
+        dialogBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+
+            }
+        });
+
+        //close dialog
+        closebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
+        //share button
+
+        TextView shareTextView = (TextView) findViewById(R.id.share);
+        shareTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                myIntent.putExtra(Intent.EXTRA_SUBJECT,"Hello!");
+                String appLink ="     Download the app now:       market:///";
+                myIntent.putExtra(Intent.EXTRA_TEXT, "My highscore in Quizzi is very high! I bet you can't beat me except you are cleverer than me " + appLink);
+                startActivity(Intent.createChooser(myIntent,"Share with:"));
+
+            }
+        });
+
+        //End share button
+
         //Randomizes the row of the questions
         mQuestionLibrary.shuffle();
-
         //We need this for the NAVIGATION DRAWER
         setSupportActionBar((Toolbar) findViewById(R.id.nav_action));
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -81,6 +119,7 @@ public class QuizActivity extends AppCompatActivity {
         mButtonChoice1 = (Button) findViewById(R.id.choice1);
         mButtonChoice2 = (Button) findViewById(R.id.choice2);
         mButtonChoice3 = (Button) findViewById(R.id.choice3);
+        final RelativeLayout bgpop = (RelativeLayout)findViewById(R.id.bgpop);
 
         List<Button> choices = new ArrayList<>();
         choices.add(mButtonChoice1);
@@ -110,37 +149,6 @@ public class QuizActivity extends AppCompatActivity {
             });
         }
 
-        findViewById(R.id.tutorial).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                ViewGroup container2 = (ViewGroup) layoutInflater.inflate(R.layout.popup_menu1_1, null);
-                popupWindow = new PopupWindow(container2, 1000, 980, true); //400,400=popUp size, true = makes that we can close the pop up by simply click out of the window
-                popupWindow.showAtLocation(mDrawerLayout, Gravity.CENTER, 0, 0);
-                mDrawerLayout.setAlpha((float) 0.3);
-
-                container2.setOnTouchListener(new View.OnTouchListener() {
-
-                    @Override
-
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        mDrawerLayout.setAlpha(1F);
-                        popupWindow.dismiss();
-                        return true;
-                    }
-
-                });
-
-                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-                    @Override
-                    public void onDismiss() {
-                        mDrawerLayout.setAlpha(1F);
-                        popupWindow.dismiss();
-                    }
-                });
-            }
-        });
     }
 
     private void updateQuestion() {
@@ -177,4 +185,22 @@ public class QuizActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
+
+
+    private void createDialog(){
+
+    dialog = new Dialog(this);
+        //Title of the dialogwith dialog.setTitle
+        dialog.setTitle("Tutorial");
+        //content
+        dialog.setContentView(R.layout.popup_menu1_1);
+        closebtn = (TextView) dialog.findViewById(R.id.closeTXT);
+
+
+
+    }
+
+
+
+
 }
