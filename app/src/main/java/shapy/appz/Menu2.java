@@ -118,10 +118,12 @@ public class Menu2 extends AppCompatActivity {
         dialogs.add(R.layout.popup_menu2_6);
 
         for (int i = 0; i < dialogs.size(); i++) {
+            final int j = i;
+
             containers.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    createDialog();
+                    createDialog(dialogs.get(j));
 
                     findViewById(R.id.enablePOPUP).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -179,10 +181,10 @@ public class Menu2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void createDialog() {
+    private void createDialog(int id) {
         dialog = new Dialog(this);
         dialog.setTitle("Tutorial");
-        dialog.setContentView(R.layout.popup_menu2_1);
+        dialog.setContentView(id);
         closeButton = (TextView) dialog.findViewById(R.id.closeBtn1);
     }
 }
