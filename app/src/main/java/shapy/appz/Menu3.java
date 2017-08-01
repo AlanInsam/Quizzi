@@ -51,29 +51,21 @@ public class Menu3 extends AppCompatActivity {
                 return true;
             }
         });
-        //Code for the rate Button: After ActivityNotFoundException e: if the market is not installed the browser will open
+
         TextView textView = (TextView) findViewById(R.id.feedback);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market:/details?id=software.simplicial.nebulous&hl=de")));
-            } catch (ActivityNotFoundException e){
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market:/details?id=software.simplicial.nebulous&hl=de")));
+                } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=software.simplicial.nebulous&hl=de")));
                 }
             }
         });
-
-       //End Rate code
-
-
-
-
-
-
     }
 
-    @Override //Makes that the "Burger" Item, shows the Drawer if someone clicks on the simbol
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }

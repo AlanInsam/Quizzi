@@ -10,12 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,13 +25,9 @@ import static shapy.appz.R.id.nv2;
 public class Menu2 extends AppCompatActivity {
 
     private int mScore;
-    private DrawerLayout mDrawerLayout2;
     private ActionBarDrawerToggle mToggle;
-    private PopupWindow mPopupWindow;
-    private LayoutInflater mLayoutInflater; // Allows adding a new layout in our window
-    private RelativeLayout mRel;
     Dialog dialog;
-    TextView closebtn;
+    TextView closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +39,9 @@ public class Menu2 extends AppCompatActivity {
         ImageView imgTrophyView1 = (ImageView) findViewById(R.id.trophy1);
         ImageView imgTrophyView2 = (ImageView) findViewById(R.id.trophy2);
         ImageView imgTrophyView3 = (ImageView) findViewById(R.id.trophy3);
-        ImageView imgTrophyView4 =(ImageView)findViewById(R.id.trophy4);
-        ImageView imgTrophyView5 =(ImageView)findViewById(R.id.trophy5);
-        ImageView imgTrophyView6 =(ImageView)findViewById(R.id.trophy6);
+        ImageView imgTrophyView4 = (ImageView) findViewById(R.id.trophy4);
+        ImageView imgTrophyView5 = (ImageView) findViewById(R.id.trophy5);
+        ImageView imgTrophyView6 = (ImageView) findViewById(R.id.trophy6);
 
         final Button bttPOPUP = (Button) findViewById(R.id.enablePOPUP);
         Button bttPOPUP2 = (Button) findViewById(R.id.enablePOPUP2);
@@ -124,43 +118,34 @@ public class Menu2 extends AppCompatActivity {
         dialogs.add(R.layout.popup_menu2_6);
 
         for (int i = 0; i < dialogs.size(); i++) {
-            final int j = i;
-
             containers.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    //createDialog
                     createDialog();
-                    Button bttopendia = (Button) findViewById(R.id.enablePOPUP);
 
-                    bttopendia.setOnClickListener(new View.OnClickListener() {
+                    findViewById(R.id.enablePOPUP).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             dialog.show();
-
                         }
                     });
 
-                    //close dialog
-                    closebtn.setOnClickListener(new View.OnClickListener() {
+                    closeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
                         }
                     });
-
                 }
-
             });
         }
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.nav_action);
-        setSupportActionBar(mToolbar);
-        mDrawerLayout2 = (DrawerLayout) findViewById(R.id.drawerLayout2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout2);
 
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout2, R.string.open, R.string.close);
-        mDrawerLayout2.addDrawerListener(mToggle);
+        mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -183,7 +168,7 @@ public class Menu2 extends AppCompatActivity {
         });
     }
 
-    @Override //Makes that the "Burger" Item, shows the Drawer if someone clicks on the symbol
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
@@ -194,28 +179,10 @@ public class Menu2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void createDialog(){
-
+    private void createDialog() {
         dialog = new Dialog(this);
-        //Title of the dialogwith dialog.setTitle
         dialog.setTitle("Tutorial");
-        //content
         dialog.setContentView(R.layout.popup_menu2_1);
-        closebtn = (TextView) dialog.findViewById(R.id.closeBtn1);
-
-
-
+        closeButton = (TextView) dialog.findViewById(R.id.closeBtn1);
     }
-
-
-
-
-
-
-
-
-
 }
-
-
-
