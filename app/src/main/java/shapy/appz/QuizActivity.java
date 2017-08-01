@@ -21,7 +21,6 @@ import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
     private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
@@ -34,11 +33,8 @@ public class QuizActivity extends AppCompatActivity {
     private String mAnswer;
     private int mScore = 0;
     private int mQuestionNumber = 0;
-    private RelativeLayout bgpop;
-    private Button dialogBTN;
     Dialog dialog;
-    TextView closebtn;
-
+    TextView closeButton;
 
 
     @Override
@@ -46,11 +42,9 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        //createDialog
         createDialog();
-        dialogBTN = (Button)findViewById(R.id.dialogbtn);
-
-        dialogBTN.setOnClickListener(new View.OnClickListener() {
+        Button dialogButton = (Button) findViewById(R.id.dialogbtn);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.show();
@@ -58,17 +52,12 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        //close dialog
-        closebtn.setOnClickListener(new View.OnClickListener() {
+        closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
-
-
-        //share button
 
         TextView shareTextView = (TextView) findViewById(R.id.share);
         shareTextView.setOnClickListener(new View.OnClickListener() {
@@ -76,29 +65,24 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                myIntent.putExtra(Intent.EXTRA_SUBJECT,"Hello!");
-                String appLink ="     Download the app now:       market:///";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, "Hello!");
+                String appLink = "     Download the app now:       market:///";
                 myIntent.putExtra(Intent.EXTRA_TEXT, "My highscore in Quizzi is very high! I bet you can't beat me except you are cleverer than me " + appLink);
-                startActivity(Intent.createChooser(myIntent,"Share with:"));
+                startActivity(Intent.createChooser(myIntent, "Share with:"));
 
             }
         });
 
-        //End share button
-
-        //Randomizes the row of the questions
         mQuestionLibrary.shuffle();
-        //We need this for the NAVIGATION DRAWER
+
         setSupportActionBar((Toolbar) findViewById(R.id.nav_action));
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Able to see the Navigation Burger "Button"
 
-
-        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nv1);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        ((NavigationView) findViewById(R.id.nv1)).setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
@@ -119,7 +103,7 @@ public class QuizActivity extends AppCompatActivity {
         mButtonChoice1 = (Button) findViewById(R.id.choice1);
         mButtonChoice2 = (Button) findViewById(R.id.choice2);
         mButtonChoice3 = (Button) findViewById(R.id.choice3);
-        final RelativeLayout bgpop = (RelativeLayout)findViewById(R.id.bgpop);
+        final RelativeLayout bgpop = (RelativeLayout) findViewById(R.id.bgpop);
 
         List<Button> choices = new ArrayList<>();
         choices.add(mButtonChoice1);
@@ -136,7 +120,6 @@ public class QuizActivity extends AppCompatActivity {
                         updateScore();
                         updateQuestion();
 
-                        //This line of code is optional...
                         Toast.makeText(QuizActivity.this, "Correct", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(QuizActivity.this, "Wrong... Try again!", Toast.LENGTH_SHORT).show();
@@ -152,7 +135,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        //If the max. number of questions is reached, menu2 will be open if not  a  new quiz selection appears
         if (mQuestionNumber < mQuestionLibrary.getLength()) {
             mQuestionView.setText(mQuestionLibrary.getQuestion(mQuestionNumber));
             mButtonChoice1.setText(mQuestionLibrary.getChoice1(mQuestionNumber));
@@ -162,10 +144,9 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             Toast.makeText(QuizActivity.this, "Last Question! You are very intelligent!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(QuizActivity.this, Menu2.class);
-            intent.putExtra("score", mScore); // pass score to Menu2
+            intent.putExtra("score", mScore);
             startActivity(intent);
         }
-
     }
 
     private void updateScore() {
@@ -181,26 +162,15 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    @Override //Makes that the "Burger" Item, shows the Drawer if someone clicks on the symbol
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-
-    private void createDialog(){
-
-    dialog = new Dialog(this);
-        //Title of the dialogwith dialog.setTitle
+    private void createDialog() {
+        dialog = new Dialog(this);
         dialog.setTitle("Tutorial");
-        //content
         dialog.setContentView(R.layout.popup_menu1_1);
-        closebtn = (TextView) dialog.findViewById(R.id.closeTXT);
-
-
-
+        closeButton = (TextView) dialog.findViewById(R.id.closeTXT);
     }
-
-
-
-
 }

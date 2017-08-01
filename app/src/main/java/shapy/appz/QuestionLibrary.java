@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class QuestionLibrary {
-//Arrays begin: the choices, question and the answer
-    private final String[] [] mChoices ={
+class QuestionLibrary {
+
+    private final String[][] mChoices = {
             {"1993", "1986", "1967"},
             {"-260", "-272,15", "279,15"},
-            {"a plant","The active substance of marijuana" , "a spider"},
-            {"6", "10","8"},
-            {"12","15","10"},
-            {"Uranus","Neptune","Saturn"},
-            {"HCl","NaCl","CO"},
-            {"John F. Kennedy", "Richard Nixon","James A. Garfield"},
-            {"Canada","Denmark", "Greenland is an own state!"},
-            {"12","20","14"},
-            {"10","12","14"},
-            {"not","never","now"},
-            {"Leningrad","Wolgograd","Dimitrijgrad"},
-            {"six","five","three"},
-            {"Germany","France","South Korea"},
-            {"Ra","Ba","Rd"},
-            {"Alabama","Alaska","California"},
-            {"Snakes and Ladders","Ludo","Monopoly"},
-            {"China","Vietnam","Japan"},
-            {"1","0","Division by 0 is not defined"},
+            {"a plant", "The active substance of marijuana", "a spider"},
+            {"6", "10", "8"},
+            {"12", "15", "10"},
+            {"Uranus", "Neptune", "Saturn"},
+            {"HCl", "NaCl", "CO"},
+            {"John F. Kennedy", "Richard Nixon", "James A. Garfield"},
+            {"Canada", "Denmark", "Greenland is an own state!"},
+            {"12", "20", "14"},
+            {"10", "12", "14"},
+            {"not", "never", "now"},
+            {"Leningrad", "Wolgograd", "Dimitrijgrad"},
+            {"six", "five", "three"},
+            {"Germany", "France", "South Korea"},
+            {"Ra", "Ba", "Rd"},
+            {"Alabama", "Alaska", "California"},
+            {"Snakes and Ladders", "Ludo", "Monopoly"},
+            {"China", "Vietnam", "Japan"},
+            {"1", "0", "Division by 0 is not defined"},
             {"Element table", "periodic system", "periodic table"},
             {"11", "13", "9"},
             {"Forrest Gump", "West Side Story", "Titanic"},
@@ -84,19 +84,17 @@ public class QuestionLibrary {
 
     };
 
-
-
     private final String mCorrectAnswers[] = {
             "1993", "-272,15", "The active substance of marijuana",
-            "8", "12","Uranus","NaCl","John F. Kennedy",
-            "Denmark","12","14","not","Wolgograd","six","South Korea","Ra","Alabama","Monopoly","Japan","Division by 0 is not defined","periodic system",
+            "8", "12", "Uranus", "NaCl", "John F. Kennedy",
+            "Denmark", "12", "14", "not", "Wolgograd", "six", "South Korea", "Ra", "Alabama", "Monopoly", "Japan", "Division by 0 is not defined", "periodic system",
             "11", "Titanic", "1776", "8848m", "China", "5", "1236 km/h", "Usain Bolt", "194", "Mercury", "Katherine Hepburn", "Apple", "1892", "Dubai"
 
     };
-//Array list will be created important for the randomizer
+
     private final List<Integer> indexes = new ArrayList<>();
 
-    public QuestionLibrary() {
+    QuestionLibrary() {
         for (int i = 0; i < mQuestions.length; ++i)
             indexes.add(i);
     }
@@ -105,35 +103,31 @@ public class QuestionLibrary {
         return indexes.get(i);
     }
 
-    public String getQuestion(int a) {
+    String getQuestion(int a) {
         return mQuestions[index(a)];
     }
 
-    public String getChoice1(int a) {
+    String getChoice1(int a) {
         return mChoices[index(a)][0];
     }
 
-    public String getChoice2(int a) {
+    String getChoice2(int a) {
         return mChoices[index(a)][1];
     }
 
-    public String getChoice3(int a) {
+    String getChoice3(int a) {
         return mChoices[index(a)][2];
     }
 
-    public String getCorrectAnswer(int a) {
+    String getCorrectAnswer(int a) {
         return mCorrectAnswers[index(a)];
     }
 
-    public int getLength() {
+    int getLength() {
         return mQuestions.length;
     }
 
-   //shuffles
-    public void shuffle() {
+    void shuffle() {
         Collections.shuffle(indexes);
     }
-
-
-
 }
