@@ -14,19 +14,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-
         <include
             layout="@layout/navigation_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="302dp">
-
 
             <TextView
                 android:id="@+id/textScore2"
@@ -74,7 +69,7 @@
                 android:layout_marginTop="18dp"
                 android:background="@drawable/bg_pill"
                 android:onClick="onClick"
-                android:text="Restart Quiz!"
+                android:text="Restart Quiz"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -84,7 +79,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="33dp"
-                android:text="Stats: play and get trophies!"
+                android:text="Stats: play and get trophies"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:textSize="20dp" />
 
@@ -122,18 +117,6 @@
                 android:layout_toLeftOf="@+id/trophy2"
                 android:layout_toStartOf="@+id/trophy2" />
 
-            <Button
-                android:id="@+id/enablePOPUP"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:alpha="0.30"
-                android:background="@drawable/toggle_img"
-                android:visibility="invisible"
-                android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/trophy1"
-                android:layout_alignStart="@+id/trophy1"
-                android:layout_alignBottom="@+id/trophy1" />
-
             <ImageView
                 android:id="@+id/trophy2"
                 android:layout_width="80dp"
@@ -142,19 +125,6 @@
                 app:srcCompat="@drawable/trophy2"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
-
-            <Button
-                android:id="@+id/enablePOPUP2"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:alpha="0.30"
-                android:background="@drawable/toggle_img"
-                android:visibility="invisible"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/trophy1"
-                android:layout_alignRight="@+id/trophy2"
-                android:layout_alignEnd="@+id/trophy2"
-                android:layout_alignBottom="@+id/trophy2" />
 
             <ImageView
                 android:id="@+id/trophy3"
@@ -167,20 +137,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
-
-            <Button
-                android:id="@+id/enablePOPUP3"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:alpha="0.30"
-                android:background="@drawable/toggle_img"
-                android:visibility="invisible"
-                android:layout_alignLeft="@+id/trophy3"
-                android:layout_alignStart="@+id/trophy3"
-                android:layout_alignParentTop="true"
-                android:layout_alignBottom="@+id/trophy3"
-                android:layout_alignRight="@+id/trophy3"
-                android:layout_alignEnd="@+id/trophy3" />
 
         </RelativeLayout>
 
@@ -235,49 +191,9 @@
                 android:layout_alignLeft="@+id/trophy4"
                 android:layout_alignStart="@+id/trophy4" />
 
-            <Button
-                android:id="@+id/enablePOPUP5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.30"
-                android:visibility="invisible"
-                android:background="@drawable/toggle_img"
-                android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/trophy5"
-                android:layout_alignEnd="@+id/trophy5"
-                android:layout_alignBottom="@+id/trophy5"
-                android:layout_alignLeft="@+id/trophy5"
-                android:layout_alignStart="@+id/trophy5" />
-
-            <Button
-                android:id="@+id/enablePOPUP6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.30"
-                android:visibility="invisible"
-                android:background="@drawable/toggle_img"
-                android:layout_alignBottom="@+id/trophy6"
-                android:layout_alignRight="@+id/trophy6"
-                android:layout_alignEnd="@+id/trophy6"
-                android:layout_alignLeft="@+id/trophy6"
-                android:layout_alignStart="@+id/trophy6"
-                android:layout_alignParentTop="true" />
         </RelativeLayout>
 
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="#000"
-        android:alpha="0.95"
-        android:id="@+id/bgpop">
-
-    </RelativeLayout>
-
-
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
@@ -287,9 +203,6 @@
         android:id="@+id/nv2"
         app:headerLayout="@layout/navigation_header"
         app:itemIconTint="@drawable/tint_color_selector2">
-
-
-
 
     </android.support.design.widget.NavigationView>
 

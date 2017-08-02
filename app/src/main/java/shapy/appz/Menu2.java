@@ -9,6 +9,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.appcompat.*;
+import android.support.v7.appcompat.BuildConfig;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +28,6 @@ public class Menu2 extends AppCompatActivity {
 
     private int mScore;
     private ActionBarDrawerToggle mToggle;
-    Dialog dialog;
-    TextView closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +36,13 @@ public class Menu2 extends AppCompatActivity {
 
         TextView txtScore = (TextView) findViewById(R.id.textScore2);
         TextView txtHighScore = (TextView) findViewById(R.id.textHighScore);
-        ImageView imgTrophyView1 = (ImageView) findViewById(R.id.trophy1);
-        ImageView imgTrophyView2 = (ImageView) findViewById(R.id.trophy2);
-        ImageView imgTrophyView3 = (ImageView) findViewById(R.id.trophy3);
-        ImageView imgTrophyView4 = (ImageView) findViewById(R.id.trophy4);
-        ImageView imgTrophyView5 = (ImageView) findViewById(R.id.trophy5);
-        ImageView imgTrophyView6 = (ImageView) findViewById(R.id.trophy6);
 
-        final Button bttPOPUP = (Button) findViewById(R.id.enablePOPUP);
-        Button bttPOPUP2 = (Button) findViewById(R.id.enablePOPUP2);
-        Button bttPOPUP3 = (Button) findViewById(R.id.enablePOPUP3);
-        Button bttPOPUP4 = (Button) findViewById(R.id.enablePOPUP4);
-        Button bttPOPUP5 = (Button) findViewById(R.id.enablePOPUP5);
-        Button bttPOPUP6 = (Button) findViewById(R.id.enablePOPUP6);
-
-        final RelativeLayout mRel = (RelativeLayout) findViewById(R.id.bgpop);
+        ImageView trophy1 = (ImageView) findViewById(R.id.trophy1);
+        ImageView trophy2 = (ImageView) findViewById(R.id.trophy2);
+        ImageView trophy3 = (ImageView) findViewById(R.id.trophy3);
+        ImageView trophy4 = (ImageView) findViewById(R.id.trophy4);
+        ImageView trophy5 = (ImageView) findViewById(R.id.trophy5);
+        ImageView trophy6 = (ImageView) findViewById(R.id.trophy6);
 
         Intent intent = getIntent();
         mScore = intent.getIntExtra("score", 0);
@@ -58,6 +50,8 @@ public class Menu2 extends AppCompatActivity {
 
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
         int highScore = mypref.getInt("highScore", 0);
+
+        highScore = Integer.MAX_VALUE; // used for debugging, TODO: remove when in production
 
         if (mScore > highScore) {
             highScore = mScore;
@@ -72,42 +66,36 @@ public class Menu2 extends AppCompatActivity {
         }
 
         if (highScore >= 10) {
-            imgTrophyView1.setVisibility(View.VISIBLE);
-            bttPOPUP.setVisibility(View.VISIBLE);
+            trophy1.setVisibility(View.VISIBLE);
         }
 
         if (highScore >= 20) {
-            imgTrophyView2.setVisibility(View.VISIBLE);
-            bttPOPUP2.setVisibility(View.VISIBLE);
+            trophy2.setVisibility(View.VISIBLE);
         }
 
         if (highScore >= 30) {
-            imgTrophyView3.setVisibility(View.VISIBLE);
-            bttPOPUP3.setVisibility(View.VISIBLE);
+            trophy3.setVisibility(View.VISIBLE);
         }
 
-        if (highScore >= 30) {
-            imgTrophyView4.setVisibility(View.VISIBLE);
-            bttPOPUP4.setVisibility(View.VISIBLE);
+        if (highScore >= 40) {
+            trophy4.setVisibility(View.VISIBLE);
         }
 
-        if (highScore >= 30) {
-            imgTrophyView5.setVisibility(View.VISIBLE);
-            bttPOPUP5.setVisibility(View.VISIBLE);
+        if (highScore >= 50) {
+            trophy5.setVisibility(View.VISIBLE);
         }
 
-        if (highScore >= 30) {
-            imgTrophyView6.setVisibility(View.VISIBLE);
-            bttPOPUP6.setVisibility(View.VISIBLE);
+        if (highScore >= 60) {
+            trophy6.setVisibility(View.VISIBLE);
         }
 
-        final List<Button> containers = new ArrayList<>();
-        containers.add(bttPOPUP);
-        containers.add(bttPOPUP2);
-        containers.add(bttPOPUP3);
-        containers.add(bttPOPUP4);
-        containers.add(bttPOPUP5);
-        containers.add(bttPOPUP6);
+        final List<ImageView> containers = new ArrayList<>();
+        containers.add(trophy1);
+        containers.add(trophy2);
+        containers.add(trophy3);
+        containers.add(trophy4);
+        containers.add(trophy5);
+        containers.add(trophy6);
 
         final List<Integer> dialogs = new ArrayList<>();
         dialogs.add(R.layout.popup_menu2_1);
@@ -117,33 +105,21 @@ public class Menu2 extends AppCompatActivity {
         dialogs.add(R.layout.popup_menu2_5);
         dialogs.add(R.layout.popup_menu2_6);
 
-        for (int i = 0; i < dialogs.size(); i++) {
+        for (int i = 0; i < containers.size(); i++) {
             final int j = i;
 
-            containers.get(i).setOnClickListener(new View.OnClickListener() {
+            containers.get(j).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    createDialog(dialogs.get(j));
-
-                    findViewById(R.id.enablePOPUP).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.show();
-                        }
-                    });
-
-                    closeButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
+                    final Dialog dialog = new Dialog(Menu2.this);
+                    dialog.setTitle("Tutorial");
+                    dialog.setContentView(dialogs.get(j));
+                    dialog.show();
                 }
             });
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
-        setSupportActionBar(toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.nav_action));
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout2);
 
         mToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -179,12 +155,5 @@ public class Menu2 extends AppCompatActivity {
         Intent intent = new Intent(Menu2.this, QuizActivity.class);
         intent.putExtra("score", mScore);
         startActivity(intent);
-    }
-
-    private void createDialog(int id) {
-        dialog = new Dialog(this);
-        dialog.setTitle("Tutorial");
-        dialog.setContentView(id);
-        closeButton = (TextView) dialog.findViewById(R.id.closeBtn1);
     }
 }

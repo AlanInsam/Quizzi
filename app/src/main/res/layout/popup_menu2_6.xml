@@ -29,20 +29,6 @@
             android:layout_marginStart="13dp"
             android:layout_marginTop="23dp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="33dp"
-            android:layout_marginStart="33dp"
-            android:clickable="true"
-            android:text="TextView"
-            android:textColor="#fff"
-            android:textSize="20dp"
-            android:layout_alignBottom="@+id/imageView3"
-            android:layout_toRightOf="@+id/imageView3"
-            android:layout_toEndOf="@+id/imageView3" />
-
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -50,7 +36,8 @@
             android:layout_marginTop="22dp"
             android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true"
-            android:id="@+id/imageView3" />
+            android:id="@+id/imageView3"
+            android:layout_marginBottom="44dp" />
 
         <ImageView
             android:id="@+id/imageView10"
