@@ -66,10 +66,8 @@ public class QuizActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, "Hello!");
-                String appLink = "     Download the app now:       market:///";
-                myIntent.putExtra(Intent.EXTRA_TEXT, "My highscore in Quizzi is very high! I bet you can't beat me except you are cleverer than me " + appLink);
+                myIntent.putExtra(Intent.EXTRA_TEXT, "My highscore in Quizzi is very high! I bet you can't beat me except you are cleverer than me. Download the app now!");
                 startActivity(Intent.createChooser(myIntent, "Share with:"));
-
             }
         });
 
@@ -103,7 +101,6 @@ public class QuizActivity extends AppCompatActivity {
         mButtonChoice1 = (Button) findViewById(R.id.choice1);
         mButtonChoice2 = (Button) findViewById(R.id.choice2);
         mButtonChoice3 = (Button) findViewById(R.id.choice3);
-        final RelativeLayout bgpop = (RelativeLayout) findViewById(R.id.bgpop);
 
         List<Button> choices = new ArrayList<>();
         choices.add(mButtonChoice1);

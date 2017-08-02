@@ -32,24 +32,10 @@
             android:layout_height="80dp"
             android:src="@drawable/trophy4"
             android:layout_marginTop="22dp"
+            android:layout_marginBottom="44dp"
             android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true"
             android:id="@+id/imageView3" />
-
-        <TextView
-            android:id="@+id/closeBtn4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/imageView3"
-            android:layout_marginTop="19dp"
-            android:layout_toEndOf="@+id/imageView3"
-            android:layout_toRightOf="@+id/imageView3"
-            android:clickable="true"
-            android:text="TextView"
-            android:textColor="#fff"
-            android:textSize="20dp" />
 
     </RelativeLayout>
 </LinearLayout>
