@@ -57,9 +57,9 @@ public class Menu3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market:/details?id=software.simplicial.nebulous&hl=de")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market:/details?id=amapps.impossiblequiz")));
                 } catch (ActivityNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=software.simplicial.nebulous&hl=de")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=amapps.impossiblequiz")));
                 }
             }
         });

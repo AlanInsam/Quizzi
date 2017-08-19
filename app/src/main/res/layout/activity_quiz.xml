@@ -17,7 +17,8 @@
 
           <include layout="@layout/navigation_action"
               android:layout_height="wrap_content"
-              android:layout_width="match_parent"/>
+              android:layout_width="match_parent"
+          />
 
 
 
@@ -108,15 +109,14 @@
         android:layout_alignParentStart="true" />
 
 
-
           <ImageView
               android:id="@+id/imageView2"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:srcCompat="@android:drawable/star_on"
-              android:layout_marginLeft="11dp"
-              android:layout_marginStart="11dp"
-              android:layout_alignBottom="@+id/score_text"
+              android:layout_marginLeft="13dp"
+              android:layout_marginStart="13dp"
+              app:srcCompat="@android:drawable/star_big_on"
+              android:layout_above="@+id/question"
               android:layout_alignParentLeft="true"
               android:layout_alignParentStart="true" />
 
@@ -126,7 +126,7 @@
               android:id="@+id/tutorialTXT"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Tutorial"
+              android:text="Info"
               android:textSize="18dp"
               android:textColor="#f60"
               android:textStyle="bold"
@@ -199,6 +199,30 @@
               android:layout_alignTop="@+id/tutorialTXT"
               android:background="@drawable/toggle_text_view"
               android:alpha="0.4"/>
+
+          <ImageView
+              android:id="@+id/imageView14"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:tint="#f60"
+              app:srcCompat="@mipmap/ic_settings_black_24dp"
+              android:layout_alignTop="@+id/shareTXT"
+              android:layout_toLeftOf="@+id/score_score"
+              android:layout_toStartOf="@+id/score_score"
+              android:layout_alignBottom="@+id/share" />
+
+          <Button
+              android:id="@+id/dialogbtn2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignEnd="@+id/imageView14"
+              android:layout_alignRight="@+id/imageView14"
+              android:layout_alignTop="@+id/imageView14"
+              android:background="@drawable/toggle_text_view"
+              android:alpha="0.4"
+              android:layout_alignLeft="@+id/imageView14"
+              android:layout_alignStart="@+id/imageView14"
+              android:layout_alignBottom="@+id/shareTXT" />
 
 
       </RelativeLayout>

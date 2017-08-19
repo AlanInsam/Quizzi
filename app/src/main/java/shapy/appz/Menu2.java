@@ -9,14 +9,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.appcompat.*;
-import android.support.v7.appcompat.BuildConfig;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,10 +25,20 @@ public class Menu2 extends AppCompatActivity {
     private int mScore;
     private ActionBarDrawerToggle mToggle;
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent =new Intent(Menu2.this,QuizActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu2);
+
+
+
 
         TextView txtScore = (TextView) findViewById(R.id.textScore2);
         TextView txtHighScore = (TextView) findViewById(R.id.textHighScore);
@@ -43,6 +49,11 @@ public class Menu2 extends AppCompatActivity {
         ImageView trophy4 = (ImageView) findViewById(R.id.trophy4);
         ImageView trophy5 = (ImageView) findViewById(R.id.trophy5);
         ImageView trophy6 = (ImageView) findViewById(R.id.trophy6);
+        ImageView genius60Score = (ImageView)findViewById(R.id.genius60Img);
+        ImageView trophyImgBefore60 = (ImageView)findViewById(R.id.statsTrophy);
+
+
+
 
         Intent intent = getIntent();
         mScore = intent.getIntExtra("score", 0);
@@ -51,7 +62,7 @@ public class Menu2 extends AppCompatActivity {
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
         int highScore = mypref.getInt("highScore", 0);
 
-        highScore = Integer.MAX_VALUE; // used for debugging, TODO: remove when in production
+
 
         if (mScore > highScore) {
             highScore = mScore;
@@ -81,12 +92,14 @@ public class Menu2 extends AppCompatActivity {
             trophy4.setVisibility(View.VISIBLE);
         }
 
-        if (highScore >= 50) {
+        if (highScore >=50) {
             trophy5.setVisibility(View.VISIBLE);
         }
 
         if (highScore >= 60) {
             trophy6.setVisibility(View.VISIBLE);
+            trophyImgBefore60.setVisibility(View.GONE);
+            genius60Score.setVisibility(View.VISIBLE);
         }
 
         final List<ImageView> containers = new ArrayList<>();
@@ -112,7 +125,7 @@ public class Menu2 extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     final Dialog dialog = new Dialog(Menu2.this);
-                    dialog.setTitle("Tutorial");
+                    dialog.setTitle("Trophies");
                     dialog.setContentView(dialogs.get(j));
                     dialog.show();
                 }
