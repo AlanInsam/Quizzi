@@ -42,7 +42,7 @@ public class QuizActivity extends AppCompatActivity {
     TextView closeButton;
     TextView closeButton2;
     CheckBox checkBoxmp;
-
+    private MediaPlayer mp, mp2;
 
     SharedPreferences mypref;
     SharedPreferences.Editor editor;
@@ -51,14 +51,6 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
-        final MediaPlayer mp = new MediaPlayer();
-        final MediaPlayer mp2 = MediaPlayer.create(this,R.raw.wrong);
-
-
-
-
-
 
 
         //Dialog 1
@@ -101,42 +93,31 @@ public class QuizActivity extends AppCompatActivity {
         //end Dialog 2
 
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
-
         final SharedPreferences.Editor editor = mypref.edit();
 
+
         checkBoxmp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                                    @Override
-                                                    public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                                                        editor.putBoolean("playSounds", !isChecked);
-                                                        editor.commit();
-                                                        if (!isChecked){
-                                                            mp.setVolume(1,1);
-                                                            mp2.setVolume(1,1);
-                                                        }else{
-                                                            mp.setVolume(0,0);
-                                                            mp2.setVolume(0,0);
-                                                        }
-                                                    }
-                                                })
-        ;
 
 
-        boolean playSounds = mypref.getBoolean("playSounds", false);
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                editor.putBoolean("playSounds", !isChecked);
+                editor.apply();
+                if (null != mp && null != mp2) {
+                    if (!isChecked) {
+                        mp.setVolume(1, 1);
+                        mp2.setVolume(1, 1);
+                    } else {
+                        mp.setVolume(0, 0);
+                        mp2.setVolume(0, 0);
+                    }
+                }
+            }
+        });
+
+        final boolean playSounds = mypref.getBoolean("playSounds", false);
         checkBoxmp.setChecked(!playSounds);
-        if(playSounds){
-
-            mp.setVolume(1,1);
-            mp2.setVolume(1,1);
-        }
-        else{
-
-            mp.setVolume(0,0);
-            mp2.setVolume(0,0);
-        }
-
-
-
-
 
         TextView shareTextView = (TextView) findViewById(R.id.share);
         shareTextView.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +132,6 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         mQuestionLibrary.shuffle();
-
 
         setSupportActionBar((Toolbar) findViewById(R.id.nav_action));
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -171,7 +151,6 @@ public class QuizActivity extends AppCompatActivity {
                         startActivity(new Intent(QuizActivity.this, Menu3.class));
                         break;
                 }
-
                 return true;
             }
         });
@@ -190,6 +169,7 @@ public class QuizActivity extends AppCompatActivity {
         updateQuestion();
 
 
+        //Code of the mediaplayer begins:
 
         for (final Button choice : choices) {
             choice.setOnClickListener(new View.OnClickListener() {
@@ -197,28 +177,61 @@ public class QuizActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (choice.getText().equals(mAnswer)) {
-
-
                         try {
-                            mp.reset();
+                            mp = new MediaPlayer();
+                            if (playSounds) {
+                                mp.setVolume(1, 1);
+                            } else {
+                                mp.setVolume(0, 0);
+                            }
+
                             AssetFileDescriptor afd;
                             afd = getAssets().openFd("sample.mp3");
-                            mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                            mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                             mp.prepare();
-                            mp.start();
+
                         } catch (IllegalStateException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.release();
+                            }
+                        });
+                        mp.start();
                         updateScore();
                         updateQuestion();
                         Toast.makeText(QuizActivity.this, "Correct", Toast.LENGTH_SHORT).show();
 
-
-
                     } else {
+                        try {
+                            mp2 = new MediaPlayer();
+                            if (playSounds) {
+                                mp2.setVolume(1, 1);
+                            } else {
+                                mp2.setVolume(0, 0);
+                            }
+                            AssetFileDescriptor afd;
+                            afd = getAssets().openFd("wrong.mp3");
+                            mp2.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                            mp2.prepare();
+
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mp2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.release();
+                            }
+                        });
                         mp2.start();
+
                         Toast.makeText(QuizActivity.this, "Wrong... Try again!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(QuizActivity.this, Menu2.class);
                         intent.putExtra("score", mScore); // pass score to Menu2
@@ -227,9 +240,10 @@ public class QuizActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
+
+    //End mediaplayer main code
     private void updateQuestion() {
         if (mQuestionNumber < mQuestionLibrary.getLength()) {
             mQuestionView.setText(mQuestionLibrary.getQuestion(mQuestionNumber));
@@ -277,7 +291,5 @@ public class QuizActivity extends AppCompatActivity {
         dialog2.setContentView(R.layout.popup_menu1_2);
         closeButton2 = (TextView) dialog2.findViewById(R.id.closeTXT2);
         checkBoxmp = (CheckBox) dialog2.findViewById(R.id.ckeckBox);
-
-
     }
 }
